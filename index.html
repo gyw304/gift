@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="GBK">
+	<title>Phaser</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=no,minimum-scale=1.0,maximum-scale=1.0">
+    <style>
+        *{margin:0;padding:0}
+        html, body {
+            -webkit-text-size-adjust:none;
+            overflow: hidden;
+        }
+        #signup{
+            width:13rem;
+            height:11.775rem;
+            background-size: 13rem 11.775rem;
+            background-image: url('assets/signup.png');
+            position: absolute;
+            left:50%;
+            top:50%;
+            margin-left:-6.5rem;
+            margin-top:-5.8875rem;
+            display: none;
+        }
+        #signup .frm{
+            margin-bottom:.6rem;
+        }
+        #signup .frm input{
+            width:7.25rem;
+            height:1.25rem;
+            background-color: #fff;
+            border: 1px solid #d96d90;
+        }
+        #signup .form{
+            width:7.25rem;
+            position: relative;
+            left:5rem;
+            top:4.2rem
+        }
+        .sub-btn{
+            text-align: center;
+            width:100%;
+            position: absolute;
+            bottom:1rem;
+        }
+        .sub-btn input{
+            width:5.375rem;
+            height:1.675rem;
+            background-size: 5.375rem 1.675rem;
+            background-image: url('assets/sub-btn.png');
+            border: none;
+            background-color: transparent;
+        }
+    </style>
+    <script src="phaser.min.js"></script>
+    <script src="Boot.js?23"></script>
+    <script src="Preloader.js"></script>
+    <script src="MainMenu.js"></script>
+    <script src="Game.js?4"></script>
+    <script src="jquery-2.1.0.min.js"></script>
+
+    <script>
+        (function (doc, win) {
+            var docEl = doc.documentElement,
+                    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+                    recalc = function () {
+                        var clientWidth = docEl.clientWidth;
+                        if (!clientWidth) return;
+                        docEl.style.fontSize = 20 * (clientWidth / 320) + 'px';
+                    };
+            if (!doc.addEventListener) return;
+            win.addEventListener(resizeEvt, recalc, false);
+            doc.addEventListener('DOMContentLoaded', recalc, false);
+        })(document, window);
+    </script>
+
+</head>
+<body style="background-color: #000">
+    <div id="signup">
+        <div class="form">
+            <div class="frm"><input type="text" id="name"/></div>
+            <div class="frm"><input type="text"/></div>
+        </div>
+        <div class="sub-btn"><input type="submit" value="" id="subBtn"/></div>
+    </div>
+<script>
+
+    var lotto1 = '50元大米一袋\n';
+    var lotto2 = '1000元购房抵用卷一张';
+
+    var islotto = 1; //是否已经中奖过 0没中 1中过了
+
+    (function() {
+        var game = new Phaser.Game(640, 1010, Phaser.CANVAS, 'game');
+        game.state.add('Boot', MyGame.Boot);
+        game.state.add('Preloader', MyGame.Preloader);
+        game.state.add('MainMenu', MyGame.MainMenu);
+        game.state.add('Game', MyGame.Game);
+        game.state.start('Boot');
+    })();
+</script>
+</body>
+</html>
